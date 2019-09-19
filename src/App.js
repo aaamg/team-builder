@@ -3,63 +3,54 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
+  const [user, setUser] = useState({username: "", email: "", role: ""});
+  //const [email, setEmail] = useState('');
+  //const [role, setRole] = useState('');
   
-  const handleNameChange = banana => {
-    setName(banana.target.value);
-  };
-
-  const handleEmailChange = banana => {
-    setEmail(banana.target.value);
-  };
-
-  const handleRoleChange = banana => {
-    setRole(banana.target.value);
+  const handleUserChange = banana => {
+    console.log("changed", banana.target.name, banana.target.value);
+    setUser({...user, [banana.target.name]: banana.target.value});
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(name);
-    console.log(email);
-    console.log(role);
+   console.log(user);
   };
   
   return (
     <div className="App">
       <form onSubmit={event => handleSubmit(event)}>
         <label>
-          Name: 
+          Userame: 
           <input 
-                id="name"
+                name="username"
                 type='text' 
-                onChange={banana => handleNameChange(banana)}
+                value={user.username}
+                onChange={banana => handleUserChange(banana)}
                 />
         </label>
 
         <label>
           email: 
           <input 
-                id="email"
-                type='text' 
-                onChange={banana => handleEmailChange(banana)}
+                name="email"
+                type='text'
+                value={user.email} 
+                onChange={banana => handleUserChange(banana)}
                 />
         </label>
 
         <label>
           Role: 
           <input 
-                id="role"
-                type='text' 
-                onChange={banana => handleRoleChange(banana)}
+                name="role"
+                type='text'
+                value={user.role}  
+                onChange={banana => handleUserChange(banana)}
                 />
         </label>
         <button type="submit">Submit</button>
       </form>
-      {console.log({name})}
-      {console.log({email})}
-      {console.log({role})}
     </div>
   );
 }
